@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <style>
+        body {
+            background-color: aliceblue;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+</head>
+
+<body>
+
+    <div ng-app="myApp" ng-controller="PersonDetails">
+
+        <table border="1">
+            <tr>
+                <td>
+                    Name:{{person.name}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Age:{{person.age}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Mobile:{{person.mobile}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Emails
+                </td>
+            </tr>
+            <tr ng-repeat="email in person.emails">
+                <td>
+                    Description:{{email.description}}
+                    E-mail:{{email.email}}
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("PersonDetails", function ($scope) {
+            $scope.person = {
+                name: "Vaishnavi Patel",
+                age: 20,
+                mobile: "6351611780",
+                emails: [
+                    { description: 'college', email: 'vaishnavipatel.it20@scet.ac.in' },
+                    { description:'Personal 1', email:'vaishupatel3153@gmail.com'},
+                    {description:'Personal 2',email:'vaishnavipatel3153@gmail.com'}
+                ]
+
+            }
+        })
+    </script>
+
+</body>
+
+</html>
