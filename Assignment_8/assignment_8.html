@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+</head>
+
+<body>
+
+    <h2>Angular JS sample Application</h2>
+    <div ng-app="myApp" ng-controller="PersonDetails">
+        <form name="studentForm" novalidate>
+            <label for="firstName">First Name</label>&nbsp; &nbsp;
+            <input type="text" name="firstname" ng-model="firstname" required />
+            <span style="color: red" ng-show="studentForm.firstname.$dirty && studentForm.firstname.$invalid">
+                <span ng-show="studentForm.firstname.$error.required">
+                    First name is required.</span>
+            </span>
+            <br />
+            <br />
+
+            <label for="lastname">Last Name</label>&nbsp; &nbsp;
+            <input type="text" name="lastname" ng-model="lastname" required />
+            <span style="color: red" ng-show="studentForm.lastname.$dirty && studentForm.lastname.$invalid">
+                <span ng-show="studentForm.lastname.$error.required">
+                    Last name is required.</span>
+            </span>
+            <br />
+            <br />
+
+            <label for="email">Email</label>&nbsp; &nbsp;
+            <input type="email" name="email" length="100" ng-model="email" required />
+            <span style="color: red" ng-show="studentForm.email.$dirty && studentForm.email.$invalid">
+                <span ng-show="studentForm.email.$error.required">Email is required.
+                </span>
+                <span ng-show="studentForm.email.$error.email">Invalid email</span>
+            </span>
+            <br />
+            <br />
+
+            <label for="mobile">Mobile No. </label>&nbsp; &nbsp;
+            <input type="text" name="mobile" length="10" ng-model="mobile" required />
+            <span style="color: red" ng-show="studentForm.mobile.$dirty && studentForm.mobile.$invalid">
+                <span ng-show="studentForm.mobile.$error.required">Mobile Number is required
+                </span>
+                <span ng-show="studentForm.mobile.$error.error">Mobile Number is Invalid</span>
+            </span>
+            <br />
+            <br />
+
+            <label for="address">Address</label> &nbsp; &nbsp;
+            <textarea name="address" row="35" cols="50" ng-model="address" required></textarea>
+            <span style="color: red" ng-show="studentForm.address.$dirty && studentForm.address.$invalid">
+                <span ng-show="studentForm.address.$error.required">Address is required
+                </span>
+            </span>
+            <br />
+            <br />
+
+            <label for="birthdate">Birth Date</label>
+            <input type="date" name="birthdate" ng-model="birthDate" />
+            <span style="color: red" ng-show="studentForm.birthdate.$dirty && studentForm.birthdate.$invalid">
+                <span ng-show="studentForm.birthdate.$error.required">Birth Date is required
+                </span>
+            </span>
+            <br />
+            <br />
+
+            <label for="Gender">Gender</label>&nbsp; &nbsp;
+            <input name="gender" type="radio" />Male &nbsp;
+            &nbsp;
+            <input name="gender" type="radio"  checked="checked" />Female &nbsp; &nbsp;
+            <br />
+            <br />
+
+            <label for="username"> Username </label>
+            <input type="text" name="username" ng-model="userName" required />
+            <span style="color: red" ng-show="studentForm.username.$dirty && studentForm.username.$invalid">
+                <span ng-show="studentForm.username.$error.required">
+                    Username is required</span>
+            </span>
+            <br />
+            <br />
+
+            <label for="password"> Password </label>
+            <input type="password" name="password" ng-model="password" required />
+            <span style="color: red" ng-show="studentForm.password.$dirty && studentForm.password.$invalid">
+                <span ng-show="studentForm.password.$error.required">
+                    Password is required</span>
+            </span>
+            <br />
+            <br />
+
+            <label for="confirm_password"> Confirm Password </label>
+            <input type="password" name="confirm_password" ng-model="confirmPassword" ng-change="checkPass()" required />
+            <span style="color: red" ng-show="studentForm.confirm_password.$dirty && studentForm.confirm_password.$invalid ">
+                <span ng-show="studentForm.confirm_password.$error.required">
+                    Confirm Password is required</span>
+            </span>
+            <span style="color: red" ng-show="isSame">
+                Confirm Password is not match with password</span>
+            <br />
+            <br />
+
+            <button ng-click="reset()">Reset</button>
+            <button ng-disabled="studentForm.firstname.$dirty && studentForm.firstname.$invalid || studentForm.lastname.$dirty && 
+            studentForm.lastname.$invalid || studentForm.email.$dirty && studentForm.email.$invalid || studentForm.birthdate.$dirty && 
+            studentForm.birthdate.$invalid || studentForm.address.$dirty && studentForm.address.$invalid || studentForm.birthdate.$dirty && 
+            studentForm.birthdate.$invalid || studentForm.username.$dirty && studentForm.username.$invalid
+            || studentForm.password.$dirty && studentForm.password.$invalid || studentForm.confirm_password.$dirty && studentForm.confirm_password.$invalid 
+            || isSame" ng-click="submit()">
+            Submit
+            </button>
+        </form>
+    </div>
+
+
+
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("PersonDetails", function ($scope) {
+            $scope.reset = function () {
+                $scope.firstname = "Vaishnavi";
+                $scope.lastname = "Patel";
+                $scope.email = "vaishupatel3153@gmail.com";
+                $scope.mobile = "1234657980";
+                $scope.address = "101, Shiv nagar";
+                $scope.birthDate = new Date();
+                $scope.confirmPassword = "123456";
+                $scope.password = "123456";
+                $scope.userName = "Vaishnavi31";
+            }
+            $scope.reset();
+
+            $scope.checkpass = function () {
+                $scope.isSame = false;
+                if (angular.equals($scope.password, $scope.confirmPassword)) {
+                    $scope.isSame = false;
+                } else if (
+                    $scope.confirmPassword == null || $scope.confirmPassword === ""
+                ) {
+                    $scope.isSame = false;
+                } else {
+                    $scope.isSame = true;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
